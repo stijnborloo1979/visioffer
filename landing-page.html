@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuoteStudio — Interactieve offertes die je klant écht beleeft</title>
+  <meta name="description" content="Maak visueel sterke, interactieve offertes in je eigen huisstijl. Online accorderen, digitale handtekening en PDF-export. Probeer QuoteStudio gratis.">
+  <meta property="og:title" content="QuoteStudio — Interactieve offertes">
+  <meta property="og:description" content="Offertes die je klant écht beleeft. Visueel, interactief, en in je eigen huisstijl.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="nl_BE">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════════════
+       AANPASSINGEN: Alle tekstuele inhoud en foto's kun je hieronder vinden
+       FOTO'S: Voeg de afbeeldingen toe in de /images/ map en update de src="" paden
+       TEKSTEN: Zoek naar de <!-- WIJZIG ME: --> comments
+       ═══════════════════════════════════════════════════════ */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #E8404E;
+      --red-hover: #d1323f;
+      --red-glow: rgba(232,64,78,.25);
+      --blue: #2563eb;
+      --blue-light: #eff6ff;
+      --purple: #7c3aed;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-500: #64748b;
+      --slate-400: #94a3b8;
+      --slate-300: #cbd5e1;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --slate-50: #f8fafc;
+      --white: #ffffff;
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --max-w: 1200px;
+      --section-py: 100px;
+    }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font-body); color: var(--slate-700); background: var(--white); line-height: 1.65; font-size: 16px; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+
+    /* ── Buttons ────────────────────────────────────────────── */
+    .btn-red {
+      background: var(--red); color: var(--white); font-weight: 600; font-size: 14px;
+      padding: 12px 28px; border-radius: 10px; border: none; cursor: pointer;
+      font-family: var(--font-body); transition: all .25s;
+      box-shadow: 0 4px 16px var(--red-glow);
+    }
+    .btn-red:hover { background: var(--red-hover); transform: translateY(-2px); box-shadow: 0 8px 24px var(--red-glow); }
+    .btn-outline {
+      background: transparent; color: var(--slate-900); font-weight: 600; font-size: 14px;
+      padding: 12px 28px; border-radius: 10px; border: 2px solid var(--slate-200);
+      cursor: pointer; font-family: var(--font-body); transition: all .25s;
+    }
+    .btn-outline:hover { border-color: var(--slate-900); background: var(--slate-50); transform: translateY(-2px); }
+
+    /* ── Utility bar ───────────────────────────────────────── */
+    .utility-bar { background: var(--slate-900); color: var(--slate-400); font-size: 12px; padding: 6px 0; letter-spacing: .02em; }
+    .utility-bar .wrap { display: flex; justify-content: space-between; align-items: center; }
+    .utility-bar a { color: var(--slate-400); transition: color .2s; }
+    .utility-bar a:hover { color: var(--white); }
+
+    /* ── Nav ────────────────────────────────────────────────── */
+    .nav { background: rgba(255,255,255,.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--slate-200); position: sticky; top: 0; z-index: 100; }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .nav-logo { font-family: var(--font-display); font-weight: 700; font-size: 22px; color: var(--slate-900); display: flex; align-items: center; gap: 8px; }
+    .nav-logo .dot { width: 10px; height: 10px; background: var(--red); border-radius: 50%; animation: pulse-dot 2s ease infinite; }
+    @keyframes pulse-dot { 0%,100% { box-shadow: 0 0 0 0 var(--red-glow); } 50% { box-shadow: 0 0 0 8px transparent; } }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--slate-500); transition: color .2s; }
+    .nav-links a:hover { color: var(--slate-900); }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+    .nav-toggle svg { width: 24px; height: 24px; color: var(--slate-900); }
+
+    /* ── Hero ───────────────────────────────────────────────── */
+    .hero { padding: 80px 0 60px; background: linear-gradient(180deg, var(--white) 0%, var(--slate-50) 100%); overflow: hidden; position: relative; }
+    .hero .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+    .hero-content { max-width: 520px; }
+    .hero h1 { font-family: var(--font-display); font-size: clamp(36px,5vw,56px); font-weight: 700; line-height: 1.1; color: var(--slate-900); letter-spacing: -.02em; margin-bottom: 20px; }
+    .hero h1 em { font-style: normal; color: var(--red); }
+    .hero-lead { font-size: 18px; color: var(--slate-500); line-height: 1.7; margin-bottom: 32px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* ── Hero visual ────────────────────────────────────────── */
+    .hero-visual { display: flex; justify-content: center; align-items: center; min-height: 480px; }
+    .hero-screenshot {
+      max-width: 420px; width: 100%;
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 32px 64px rgba(15,23,42,.2);
+      border: 1px solid var(--slate-200);
+      animation: float-up 3s ease-in-out infinite;
+    }
+    .hero-screenshot img { width: 100%; display: block; }
+    @keyframes float-up { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+    /* ── Trust bar ──────────────────────────────────────────── */
+    .trust { background: var(--white); border-top: 1px solid var(--slate-200); border-bottom: 1px solid var(--slate-200); padding: 48px 0; }
+    .trust .wrap { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; }
+    .trust-item { text-align: center; }
+    .trust-value { font-family: var(--font-display); font-size: 36px; font-weight: 700; color: var(--slate-900); }
+    .trust-label { font-size: 13px; color: var(--slate-500); margin-top: 4px; }
+
+    /* ── Demo ───────────────────────────────────────────────── */
+    .demo { padding: var(--section-py) 0; background: var(--slate-50); }
+    .demo .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .section-eyebrow { font-size: 13px; font-weight: 600; color: var(--red); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 12px; }
+    .section-heading { font-family: var(--font-display); font-size: clamp(28px,3.5vw,40px); font-weight: 700; color: var(--slate-900); line-height: 1.15; margin-bottom: 16px; }
+    .section-text { font-size: 16px; color: var(--slate-500); line-height: 1.7; margin-bottom: 28px; }
+    .demo-check-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .demo-check-list li { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--slate-700); font-weight: 500; }
+    .demo-check-list .check { width: 22px; height: 22px; background: #dcfce7; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .demo-check-list .check svg { width: 13px; height: 13px; color: #16a34a; }
+
+    .demo-screenshot {
+      max-width: 500px; width: 100%;
+      border-radius: 16px; overflow: hidden;
+      box-shadow: 0 12px 40px rgba(15,23,42,.1);
+      border: 1px solid var(--slate-200);
+    }
+    .demo-screenshot img { width: 100%; display: block; }
+
+    /* ── Features ───────────────────────────────────────────── */
+    .features { padding: var(--section-py) 0; background: var(--white); }
+    .features-header { text-align: center; margin-bottom: 60px; }
+    .features-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 28px; }
+    .feature-card {
+      background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: 16px;
+      padding: 36px 32px; transition: all .35s ease; position: relative; overflow: hidden;
+    }
+    .feature-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--red), var(--purple));
+      transform: scaleX(0); transform-origin: left; transition: transform .4s ease;
+    }
+    .feature-card:hover::before { transform: scaleX(1); }
+    .feature-card:hover { border-color: var(--red); box-shadow: 0 12px 40px rgba(232,64,78,.08); transform: translateY(-4px); }
+    .feature-icon {
+      width: 52px; height: 52px; background: var(--white); border: 1px solid var(--slate-200);
+      border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+      transition: all .35s;
+    }
+    .feature-card:hover .feature-icon { background: var(--red); border-color: var(--red); }
+    .feature-card:hover .feature-icon svg { color: var(--white); }
+    .feature-icon svg { width: 24px; height: 24px; color: var(--red); transition: color .35s; }
+    .feature-card h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--slate-900); margin-bottom: 8px; }
+    .feature-card p { font-size: 14px; color: var(--slate-500); line-height: 1.7; }
+
+    /* ── Screenshots sectie ───────────────────────────────────── */
+    .screenshots { padding: var(--section-py) 0; background: var(--white); }
+    .screenshots-header { text-align: center; margin-bottom: 60px; }
+    .screenshots-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .screenshot-card {
+      border-radius: 16px; overflow: hidden;
+      box-shadow: 0 8px 32px rgba(15,23,42,.08);
+      border: 1px solid var(--slate-200);
+      transition: transform .35s, box-shadow .35s;
+    }
+    .screenshot-card:hover { transform: translateY(-8px); box-shadow: 0 16px 48px rgba(15,23,42,.15); }
+    .screenshot-image {
+      width: 100%; aspect-ratio: 4/5; background: var(--slate-100);
+      display: flex; align-items: center; justify-content: center; color: var(--slate-400);
+      font-size: 14px; overflow: hidden;
+    }
+    .screenshot-image img { width: 100%; height: 100%; object-fit: cover; }
+    .screenshot-label {
+      padding: 16px 20px; background: var(--white); border-top: 1px solid var(--slate-200);
+    }
+    .screenshot-label h4 { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--slate-900); margin-bottom: 4px; }
+    .screenshot-label p { font-size: 13px; color: var(--slate-500); }
+
+    /* ── Showcase ──────────────────────────────────────────── */
+    .showcase { padding: var(--section-py) 0; background: var(--slate-50); }
+    .showcase-header { text-align: center; margin-bottom: 60px; }
+    .showcase-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .showcase-card {
+      background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px;
+      overflow: hidden; transition: box-shadow .35s;
+    }
+    .showcase-card:hover { box-shadow: 0 20px 50px rgba(15,23,42,.12); }
+    .showcase-img {
+      height: 200px; display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, var(--slate-100), var(--slate-200));
+    }
+    .showcase-img img { width: 100%; height: 100%; object-fit: cover; }
+    .showcase-body { padding: 24px; }
+    .showcase-body h3 { font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--slate-900); margin-bottom: 6px; }
+    .showcase-body p { font-size: 13px; color: var(--slate-500); line-height: 1.6; }
+    .showcase-tag { display: inline-block; font-size: 11px; font-weight: 600; color: var(--blue); background: var(--blue-light); padding: 3px 10px; border-radius: 4px; margin-top: 12px; }
+
+    /* ── Pricing CTA ───────────────────────────────────────── */
+    .pricing-cta { padding: var(--section-py) 0; background: var(--white); }
+    .pricing-box {
+      background: var(--slate-900); border-radius: 24px; padding: 60px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+      overflow: hidden; position: relative;
+    }
+    .pricing-box::after {
+      content: ''; position: absolute; top: -50%; right: -20%; width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(232,64,78,.15), transparent 70%); pointer-events: none;
+    }
+    .pricing-box::before {
+      content: ''; position: absolute; bottom: -40%; left: -10%; width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(37,99,235,.1), transparent 70%); pointer-events: none;
+    }
+    .pricing-left h2 { font-family: var(--font-display); font-size: clamp(28px,3vw,38px); font-weight: 700; color: var(--white); line-height: 1.15; margin-bottom: 16px; }
+    .pricing-left p { color: var(--slate-400); font-size: 16px; line-height: 1.7; }
+    .pricing-right { display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; z-index: 1; }
+    .pricing-amount { font-family: var(--font-display); font-size: 56px; font-weight: 700; color: var(--white); }
+    .pricing-period { color: var(--slate-400); font-size: 16px; margin-bottom: 24px; }
+    .pricing-right .btn-red { padding: 16px 40px; font-size: 16px; border-radius: 12px; }
+    .pricing-note { color: var(--slate-500); font-size: 12px; margin-top: 16px; }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    .footer { background: var(--slate-50); border-top: 1px solid var(--slate-200); padding: 48px 0 32px; }
+    .footer .wrap { display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 40px; }
+    .footer-brand { font-family: var(--font-display); font-weight: 700; font-size: 20px; color: var(--slate-900); display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .footer-brand .dot { width: 8px; height: 8px; background: var(--red); border-radius: 50%; }
+    .footer-tagline { font-size: 13px; color: var(--slate-400); max-width: 260px; }
+    .footer-col h4 { font-size: 13px; font-weight: 600; color: var(--slate-900); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 14px; }
+    .footer-col a { display: block; font-size: 14px; color: var(--slate-500); padding: 4px 0; transition: color .2s; }
+    .footer-col a:hover { color: var(--red); }
+    .footer-bottom { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--slate-200); font-size: 12px; color: var(--slate-400); text-align: center; }
+
+    /* ── Scroll reveal ──────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .35s; }
+
+    /* ── Responsive ────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero .wrap { grid-template-columns: 1fr; gap: 32px; }
+      .demo .wrap { grid-template-columns: 1fr; gap: 40px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .screenshots-grid { grid-template-columns: repeat(2,1fr); }
+      .showcase-grid { grid-template-columns: 1fr; }
+      .pricing-box { grid-template-columns: 1fr; padding: 40px 28px; gap: 32px; text-align: center; }
+      .pricing-left { text-align: center; }
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+      .nav-links.open {
+        display: flex; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0;
+        background: var(--white); border-bottom: 1px solid var(--slate-200); padding: 24px; gap: 16px;
+        box-shadow: 0 8px 32px rgba(0,0,0,.08);
+      }
+      .trust .wrap { gap: 32px; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 48px 0 40px; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn-red, .hero-actions .btn-outline { width: 100%; text-align: center; }
+      .utility-bar .wrap { flex-direction: column; gap: 4px; text-align: center; }
+      .screenshots-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Utility bar -->
+  <div class="utility-bar">
+    <div class="wrap">
+      <span>Professionele offertetool voor B2B</span>
+      <a href="mailto:info@quotestudio.app">info@quotestudio.app</a>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="wrap">
+      <a href="#" class="nav-logo"><span class="dot"></span> QuoteStudio</a>
+      <div class="nav-links" id="nav-links">
+        <a href="#features">Product</a>
+        <a href="#screenshots">Screenshots</a>
+        <a href="#showcase">Realisaties</a>
+        <a href="#pricing">Prijzen</a>
+        <button class="btn-red" onclick="window.location.href='/register'">Gratis proberen</button>
+      </div>
+      <button class="nav-toggle" onclick="document.getElementById('nav-links').classList.toggle('open')" aria-label="Menu">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══ Hero ════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-content">
+        <!-- WIJZIG ME: Hero headline -->
+        <h1>Offertes die je klant <em>écht</em> beleeft</h1>
+        <!-- WIJZIG ME: Hero leadtekst -->
+        <p class="hero-lead">
+          Bouw visueel sterke, interactieve offertes in je eigen huisstijl.
+          Je klant klikt, bekijkt en accepteert — alles online, op elk scherm.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-red" onclick="document.getElementById('screenshots').scrollIntoView({behavior:'smooth'})">Bekijk demo</button>
+          <button class="btn-outline" onclick="window.location.href='/register'">Gratis proberen</button>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-screenshot">
+          <!-- WIJZIG ME: Hero screenshot — voeg je app-screenshot in via images/hero.jpg -->
+          <img src="images/hero.jpg" alt="QuoteStudio app preview" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Trust bar ════════════════════════════════════════ -->
+  <section class="trust">
+    <div class="wrap">
+      <!-- WIJZIG ME: Trust statistics — pas de getallen en labels aan -->
+      <div class="trust-item reveal">
+        <div class="trust-value">2×</div>
+        <div class="trust-label">sneller geaccepteerd</div>
+      </div>
+      <div class="trust-item reveal reveal-delay-1">
+        <div class="trust-value">&lt; 5 min</div>
+        <div class="trust-label">offerte opstellen</div>
+      </div>
+      <div class="trust-item reveal reveal-delay-2">
+        <div class="trust-value">100%</div>
+        <div class="trust-label">in je eigen huisstijl</div>
+      </div>
+      <div class="trust-item reveal reveal-delay-3">
+        <div class="trust-value">0</div>
+        <div class="trust-label">papier of bijlagen</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Demo with screenshot ════════════════════════════ -->
+  <section class="demo">
+    <div class="wrap">
+      <div>
+        <div class="section-eyebrow reveal">Hoe het werkt</div>
+        <!-- WIJZIG ME: Demo heading en tekst -->
+        <h2 class="section-heading reveal">Je klant beleeft<br>elk detail</h2>
+        <p class="section-text reveal">
+          Interactieve, op maat gemaakte offertes waarin je klant producten
+          in context ziet, details verkendt en direct accepteert.
+        </p>
+        <ul class="demo-check-list">
+          <li class="reveal reveal-delay-1">
+            <span class="check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+            <!-- WIJZIG ME: Checkboxen teksten -->
+            Klant klikt, bekijkt producten en accepteert online
+          </li>
+          <li class="reveal reveal-delay-2">
+            <span class="check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+            360°-beelden en interactieve productweergaven
+          </li>
+          <li class="reveal reveal-delay-3">
+            <span class="check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+            Automatische notificatie bij acceptatie
+          </li>
+        </ul>
+      </div>
+      <div class="demo-screenshot reveal">
+        <!-- WIJZIG ME: Demo screenshot — voeg je app-screenshot in via images/demo.jpg -->
+        <img src="images/demo.jpg" alt="Demo offerte screenshot" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Features ════════════════════════════════════════ -->
+  <section class="features" id="features">
+    <div class="wrap">
+      <div class="features-header">
+        <div class="section-eyebrow reveal">Mogelijkheden</div>
+        <!-- WIJZIG ME: Features heading -->
+        <h2 class="section-heading reveal">Alles voor een onweerstaanbare offerte</h2>
+        <p class="section-text reveal" style="max-width:560px;margin:0 auto">Van visuele opbouw tot digitale handtekening — alles in één tool, altijd in je eigen huisstijl.</p>
+      </div>
+      <div class="features-grid">
+        <!-- WIJZIG ME: Voeg zoveel feature cards toe als je wilt, kopieer de div eronder -->
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/></svg>
+          </div>
+          <h3>Visuele offertes in je huisstijl</h3>
+          <p>Je logo, kleuren en typografie — automatisch toegepast. Elke offerte oogt alsof een designer er aan heeft gewerkt.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-1">
+          <div class="feature-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z"/></svg>
+          </div>
+          <h3>360° en interactieve beelden</h3>
+          <p>Laat je klant producten vanuit elk hoek bekijken. Van vergaderruimtes tot installaties — alles tot leven gebracht.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-2">
+          <div class="feature-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>
+          </div>
+          <h3>Online accepteren & ondertekenen</h3>
+          <p>Je klant accordeert met één klik en zet een digitale handtekening. Jij krijgt direct een notificatie.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-3">
+          <div class="feature-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+          </div>
+          <h3>PDF-export & facturatie</h3>
+          <p>Genereer een pixel-perfecte PDF in je huisstijl, of zet de geaccepteerde offerte direct om naar een factuur.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Screenshots ══════════════════════════════════════ -->
+  <section class="screenshots" id="screenshots">
+    <div class="wrap">
+      <div class="screenshots-header">
+        <div class="section-eyebrow reveal">Bekijk</div>
+        <!-- WIJZIG ME: Screenshots heading -->
+        <h2 class="section-heading reveal">Hoe QuoteStudio eruitziet</h2>
+        <p class="section-text reveal" style="max-width:560px;margin:0 auto">Stap voor stap door de app — van offerte maken tot acceptatie door je klant.</p>
+      </div>
+      <div class="screenshots-grid">
+        <!-- WIJZIG ME: Screenshots — upload je eigen afbeeldingen naar images/ en update de src="" paden -->
+        <div class="screenshot-card reveal">
+          <div class="screenshot-image">
+            <img src="images/screenshot-1.jpg" alt="Screenshot 1: Offerte maken">
+          </div>
+          <div class="screenshot-label">
+            <h4>Offerte maken</h4>
+            <p>Voeg producten toe en stel prijzen in — allemaal in je huisstijl.</p>
+          </div>
+        </div>
+
+        <div class="screenshot-card reveal reveal-delay-1">
+          <div class="screenshot-image">
+            <img src="images/screenshot-2.jpg" alt="Screenshot 2: 360 viewer">
+          </div>
+          <div class="screenshot-label">
+            <h4>360° productbrowser</h4>
+            <p>Klant bekijkt alles van dichtbij. Roterend, interactief, indrukwekkend.</p>
+          </div>
+        </div>
+
+        <div class="screenshot-card reveal reveal-delay-2">
+          <div class="screenshot-image">
+            <img src="images/screenshot-3.jpg" alt="Screenshot 3: Acceptatie">
+          </div>
+          <div class="screenshot-label">
+            <h4>Online accepteren</h4>
+            <p>Klant zet handtekening en jij krijgt direct een notificatie.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Showcase ═════════════════════════════════════════ -->
+  <section class="showcase" id="showcase">
+    <div class="wrap">
+      <div class="showcase-header">
+        <div class="section-eyebrow reveal">Toepassingen</div>
+        <!-- WIJZIG ME: Showcase heading -->
+        <h2 class="section-heading reveal">Werkt in elke sector</h2>
+        <p class="section-text reveal" style="max-width:480px;margin:0 auto">Van AV-integrators tot interieurbouwers — QuoteStudio past zich aan je sector aan.</p>
+      </div>
+      <div class="showcase-grid">
+        <!-- WIJZIG ME: Showcase cards — update teksten en voeg sector-foto's toe via images/ -->
+        <div class="showcase-card reveal">
+          <div class="showcase-img">
+            <img src="images/sector-av.jpg" alt="AV vergaderzaal">
+          </div>
+          <div class="showcase-body">
+            <h3>Meeting Room Offerte</h3>
+            <p>Complete AV-oplossing met displays, camera's en geluidsinstallatie per ruimte — inclusief 360°-preview.</p>
+            <span class="showcase-tag">AV Integratie</span>
+          </div>
+        </div>
+
+        <div class="showcase-card reveal reveal-delay-1">
+          <div class="showcase-img">
+            <img src="images/sector-solar.jpg" alt="Zonnepanelen">
+          </div>
+          <div class="showcase-body">
+            <h3>Zonnepanelen Offerte</h3>
+            <p>Panelen, omvormer en installatie gebundeld met gesimuleerd rendement en terugverdientijd.</p>
+            <span class="showcase-tag">Solar</span>
+          </div>
+        </div>
+
+        <div class="showcase-card reveal reveal-delay-2">
+          <div class="showcase-img">
+            <img src="images/sector-interior.jpg" alt="Interieurinrichting">
+          </div>
+          <div class="showcase-body">
+            <h3>Interieurinrichting</h3>
+            <p>Meubilair, verlichting en afwerking per ruimte — met foto's en materiaalspecificaties.</p>
+            <span class="showcase-tag">Interieur</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Pricing CTA ══════════════════════════════════════ -->
+  <section class="pricing-cta" id="pricing">
+    <div class="wrap">
+      <div class="pricing-box reveal">
+        <div class="pricing-left">
+          <!-- WIJZIG ME: Pricing heading en tekst -->
+          <h2>Klaar om je offertes naar een hoger niveau te tillen?</h2>
+          <p>Start vandaag met 14 dagen gratis. Geen creditcard nodig, geen verplichtingen. Upgrade of annuleer op elk moment.</p>
+        </div>
+        <div class="pricing-right">
+          <div class="pricing-amount">vanaf €39</div>
+          <div class="pricing-period">per maand · excl. BTW</div>
+          <button class="btn-red" onclick="window.location.href='/pricing'">Bekijk alle plannen</button>
+          <div class="pricing-note">Starter · Pro · Enterprise</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Footer ═══════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="wrap">
+      <div>
+        <div class="footer-brand"><span class="dot"></span> QuoteStudio</div>
+        <p class="footer-tagline">Professionele interactieve offertes voor B2B — sneller, visueler en altijd in je eigen huisstijl.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#features">Mogelijkheden</a>
+        <a href="#screenshots">Screenshots</a>
+        <a href="#showcase">Toepassingen</a>
+        <a href="#pricing">Prijzen</a>
+      </div>
+      <div class="footer-col">
+        <h4>Sectoren</h4>
+        <!-- WIJZIG ME: Voeg je sectoren toe -->
+        <a href="#">AV & vergaderzalen</a>
+        <a href="#">Zonne-energie</a>
+        <a href="#">Interieur & bouw</a>
+        <a href="#">Events & HVAC</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:info@quotestudio.app">info@quotestudio.app</a>
+        <a href="#">Privacy</a>
+        <a href="#">Voorwaarden</a>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="footer-bottom">© 2024 QuoteStudio. Alle rechten voorbehouden.</div>
+    </div>
+  </footer>
+
+  <script>
+    // ═══ Scroll reveal ═════════════════════════════════════
+    var reveals = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(function(el) { observer.observe(el); });
+
+    // ═══ Smooth nav scroll ═════════════════════════════════
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById('nav-links').classList.remove('open');
+      });
+    });
+  </script>
+</body>
+</html>
