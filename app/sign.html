@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Offerte laden...</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Arial,sans-serif;background:#f0f2f5;display:flex;align-items:center;justify-content:center;min-height:100vh}
+  .ld{text-align:center;padding:40px}
+  .ld h2{color:#1a1a2e;margin-bottom:12px}
+  .ld p{color:#6c757d;font-size:14px}
+  .sp{width:40px;height:40px;border:4px solid #dee2e6;border-top-color:var(--brand,#2563eb);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .err{color:var(--brand,#2563eb);font-weight:700}
+</style>
+</head>
+<body>
+<div class="ld" id="loader">
+  <div class="sp"></div>
+  <h2>Offerte wordt geladen</h2>
+  <p>Even geduld...</p>
+</div>
+<script>
+(function(){
+  var SUPA_URL  = "https://dgzkuqvviivoafinrfty.supabase.co";
+  var SUPA_ANON = "sb_publishable_tBJ3WekHvNawQCECwdgT5Q_F2bI-769";
+
+  var params = new URLSearchParams(window.location.search);
+  var id     = params.get("id");
+
+  // Themakleur van de loader per tenant (?tenant=acme). De offerte-HTML zelf
+  // is al volledig gerenderd opgeslagen; enkel deze laadindicator wordt gekleurd.
+  var BRAND = { "default":"#2563eb" };
+  var tenant = params.get("tenant") || "default";
+  document.documentElement.style.setProperty("--brand", BRAND[tenant] || BRAND["default"]);
+
+  if(!id){
+    document.getElementById("loader").innerHTML = '<p class="err">Geen offerte-ID opgegeven.</p>';
+    return;
+  }
+
+  fetch(SUPA_URL + "/rest/v1/signing_pages?id=eq." + encodeURIComponent(id) + "&select=html_content", {
+    headers: {
+      "apikey": SUPA_ANON,
+      "Authorization": "Bearer " + SUPA_ANON
+    }
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(rows){
+    if(!rows || !rows.length || !rows[0].html_content){
+      document.getElementById("loader").innerHTML = '<p class="err">Offerte niet gevonden of verlopen.</p>';
+      return;
+    }
+    document.open();
+    document.write(rows[0].html_content);
+    document.close();
+  })
+  .catch(function(e){
+    document.getElementById("loader").innerHTML = '<p class="err">Fout bij laden: ' + e.message + '</p>';
+  });
+})();
+</script>
+</body>
+</html>
