@@ -88,8 +88,8 @@
 "#vo-backdrop{position:fixed;inset:0;z-index:199999;background:transparent;opacity:0;transition:opacity .35s;pointer-events:all}",
 "#vo-backdrop.on{opacity:1}",
 
-      "#vo-spotlight{position:fixed;z-index:200001;border-radius:10px;box-shadow:0 0 0 9999px rgba(15,23,42,.25);transition:all .4s cubic-bezier(.4,0,.2,1);pointer-events:none}",
-      "#vo-tooltip{position:fixed;z-index:200002;width:340px;background:#fff;border-radius:16px;padding:0;box-shadow:0 20px 60px rgba(15,23,42,.25),0 0 0 1px rgba(15,23,42,.06);opacity:0;transform:translateY(12px);transition:opacity .3s,transform .3s;pointer-events:all;overflow:hidden}",
+           "#vo-spotlight{position:fixed;z-index:200001;border-radius:10px;box-shadow:0 0 0 9999px rgba(15,23,42,.25);transition:all .4s cubic-bezier(.4,0,.2,1);pointer-events:none}",
+      "#vo-tooltip{position:fixed;opacity:0;transform:translateY(12px);transition:opacity .3s,transform .3s;pointer-events:all;overflow:hidden}",
       "#vo-tooltip.on{opacity:1;transform:translateY(0)}",
       ".vo-tt-accent{height:4px;background:linear-gradient(90deg,#E8404E,#7c3aed)}",
       ".vo-tt-body{padding:24px 24px 20px}",
