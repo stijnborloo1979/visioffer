@@ -1,0 +1,44 @@
+# ═══════════════════════════════════════════════════════════════════════
+# Cloudflare Pages — Security & Caching Headers
+# ───────────────────────────────────────────────────────────────────────
+# Plaats in de ROOT van de repository (niet in /app/).
+# ═══════════════════════════════════════════════════════════════════════
+
+# Alle pagina's: security headers
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  X-XSS-Protection: 1; mode=block
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+# HTML-pagina's: niet cachen
+/*.html
+  Cache-Control: no-cache, must-revalidate
+/app/*.html
+  Cache-Control: no-cache, must-revalidate
+
+# Service worker: nooit cachen
+/app/sw.js
+  Cache-Control: no-cache, no-store, must-revalidate
+
+# Manifest
+/app/manifest.json
+  Cache-Control: public, max-age=3600
+
+# JS-bestanden: kort cachen
+/app/*.js
+  Cache-Control: public, max-age=300
+
+# Afbeeldingen: lang cachen
+/images/*
+  Cache-Control: public, max-age=604800
+/app/*.jpg
+  Cache-Control: public, max-age=604800
+/app/*.png
+  Cache-Control: public, max-age=604800
+
+# Sign.html: extra CSP (publiek toegankelijk, laadt externe HTML)
+/app/sign.html
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; connect-src 'self' https://*.supabase.co; frame-ancestors 'none'

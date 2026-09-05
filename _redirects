@@ -1,0 +1,11 @@
+# ═══════════════════════════════════════════════════════════════════════
+# Cloudflare Pages — Redirects & SPA routing
+# ───────────────────────────────────────────────────────────────────────
+# Plaats in de ROOT van de repository.
+#
+# Fysieke bestanden (sign.html, signup.html, sw.js, etc.) worden
+# automatisch geserveerd. Deze regels vangen de rest op.
+# ═══════════════════════════════════════════════════════════════════════
+
+# App SPA fallback: onbekende paden binnen /app/ → app index
+/app/*  /app/index.html  200
