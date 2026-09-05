@@ -289,13 +289,10 @@
 
   function endTour() {
     setTourDone();
-    var wm = document.getElementById("vo-welcome");
-    if (wm) wm.remove();
-    if (_els.backdrop) { _els.backdrop.className = ""; setTimeout(function () { _els.backdrop.remove(); }, 400); }
-    if (_els.spotlight) _els.spotlight.remove();
-    if (_els.tooltip) _els.tooltip.remove();
-    var ov = document.getElementById("vo-overlay");
-    if (ov) ov.remove();
+    ["vo-welcome","vo-backdrop","vo-spotlight","vo-overlay"].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.remove();
+    });
     _els = {};
     showChecklist();
   }
