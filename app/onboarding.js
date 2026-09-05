@@ -85,8 +85,8 @@
       "@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap');",
 
       "#vo-overlay{position:fixed;inset:0;z-index:200000;pointer-events:none}",
-"#vo-backdrop{position:fixed;inset:0;z-index:199999;background:rgba(15,23,42,.35);
-       "#vo-backdrop.on{opacity:1}",
+"#vo-backdrop{position:fixed;inset:0;z-index:199999;background:transparent;opacity:0;transition:opacity .35s;pointer-events:all}",
+"#vo-backdrop.on{opacity:1}",
 
 "#vo-spotlight{position:fixed;z-index:200001;border-radius:10px;box-shadow:0 0 0 9999px rgba(15,23,42,.35);
       "#vo-tooltip{position:fixed;z-index:200002;width:340px;background:#fff;border-radius:16px;padding:0;box-shadow:0 20px 60px rgba(15,23,42,.25),0 0 0 1px rgba(15,23,42,.06);opacity:0;transform:translateY(12px);transition:opacity .3s,transform .3s;pointer-events:all;overflow:hidden}",
