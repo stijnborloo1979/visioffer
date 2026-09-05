@@ -405,8 +405,11 @@
     var attempts = 0;
     var wait = setInterval(function () {
       attempts++;
-      var appReady = document.querySelector(".topbar") || document.getElementById("sstep-1");
-      if (appReady || attempts > 40) {
+      var topbar = document.querySelector(".topbar");
+      var loginScreen = document.getElementById("login-screen");
+      var loginVisible = loginScreen && loginScreen.style.display !== "none" && loginScreen.offsetHeight > 0;
+      var appReady = topbar && topbar.offsetHeight > 0 && !loginVisible;
+      if (appReady || attempts > 60) {
         clearInterval(wait);
         if (appReady) init();
       }
