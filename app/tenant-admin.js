@@ -688,7 +688,7 @@
       if (cl && cl.from) {
         var row = {};
         Object.keys(DB).forEach(function (k) { if (cfg[k] != null) row[DB[k]] = cfg[k]; });
-        var res = await cl.from("qs_tenants").upsert(row, { onConflict: "slug" });
+       var res = await cl.from("qs_tenants").update(row).eq("slug", cfg.slug);
         if (res && res.error) throw new Error(res.error.message);
         saved = "Supabase + lokaal";
       }
