@@ -287,9 +287,9 @@
     document.getElementById("vo-w-start").onclick = function () { goStep(1); };
   }
 
-  function endTour() {
+   function endTour() {
     setTourDone();
-    ["vo-welcome","vo-backdrop","vo-spotlight","vo-overlay"].forEach(function(id) {
+    ["vo-welcome","vo-backdrop","vo-spotlight","vo-overlay","vo-tooltip"].forEach(function(id) {
       var el = document.getElementById(id);
       if (el) el.remove();
     });
