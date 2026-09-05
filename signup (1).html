@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gratis proberen — VisiOffer</title>
+<meta name="description" content="Start vandaag met 14 dagen gratis VisiOffer. Geen creditcard nodig.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --brand: #6d3cf5;
+  --brand-dark: #5b2de0;
+  --brand-light: #f3efff;
+  --text: #1e293b;
+  --text-secondary: #64748b;
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --border: #e2e8f0;
+  --danger: #dc2626;
+  --success: #059669;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+
+.nav{background:var(--card);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:18px;font-weight:700;color:var(--text);letter-spacing:-.02em}
+.nav-logo span{color:var(--brand)}
+.nav-back{font-size:13px;color:var(--text-secondary)}
+.nav-back:hover{color:var(--brand);text-decoration:none}
+
+.page{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px}
+
+.signup{background:var(--card);border:1px solid var(--border);border-radius:16px;width:100%;max-width:460px;padding:40px 36px;box-shadow:0 4px 24px rgba(0,0,0,.06)}
+.signup-badge{display:inline-block;background:var(--brand-light);color:var(--brand);font-size:12px;font-weight:600;padding:4px 12px;border-radius:99px;margin-bottom:20px}
+.signup h1{font-size:24px;font-weight:700;margin-bottom:6px;letter-spacing:-.03em}
+.signup p.sub{font-size:14px;color:var(--text-secondary);margin-bottom:28px;line-height:1.6}
+
+.field{margin-bottom:18px}
+.field label{display:block;font-size:12.5px;font-weight:600;color:var(--text);margin-bottom:6px}
+.field input,.field select{width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;color:var(--text);background:var(--card);outline:none;transition:border-color .15s,box-shadow .15s}
+.field input:focus,.field select:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(109,60,245,.1)}
+.field input::placeholder{color:#94a3b8}
+
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:480px){.row{grid-template-columns:1fr}}
+
+.sectors{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.sector-chip{padding:6px 14px;border-radius:99px;border:1px solid var(--border);font-size:12.5px;color:var(--text-secondary);cursor:pointer;background:var(--card);font-family:inherit;transition:all .15s}
+.sector-chip:hover{border-color:var(--brand);color:var(--brand)}
+.sector-chip.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+
+.btn{width:100%;padding:13px;border:none;border-radius:10px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;transition:all .15s;margin-top:6px}
+.btn-primary{background:var(--brand);color:#fff}
+.btn-primary:hover:not(:disabled){background:var(--brand-dark)}
+.btn-primary:disabled{opacity:.55;cursor:default}
+
+.status{margin-top:16px;padding:12px 16px;border-radius:10px;font-size:13px;line-height:1.6;display:none}
+.status.error{display:block;background:#fef2f2;color:var(--danger);border:1px solid #fecaca}
+.status.success{display:block;background:#ecfdf5;color:var(--success);border:1px solid #a7f3d0}
+
+.legal{text-align:center;margin-top:20px;font-size:12px;color:var(--text-secondary);line-height:1.7}
+
+.features{display:flex;flex-direction:column;gap:12px;margin-top:24px;padding-top:24px;border-top:1px solid var(--border)}
+.feature{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--text-secondary);line-height:1.5}
+.feature-icon{width:22px;height:22px;border-radius:50%;background:var(--brand-light);color:var(--brand);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;font-weight:700;margin-top:1px}
+
+.success-view{text-align:center;padding:20px 0}
+.success-icon{font-size:52px;margin-bottom:12px}
+.success-view h2{font-size:22px;font-weight:700;margin-bottom:8px}
+.success-view p{font-size:14px;color:var(--text-secondary);line-height:1.7;margin-bottom:24px}
+
+.loader{display:flex;flex-direction:column;align-items:center;gap:16px;padding:40px 0}
+.spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--brand);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-text{font-size:14px;color:var(--text-secondary)}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="./" class="nav-logo">Visi<span>Offer</span></a>
+  <a href="./" class="nav-back">&larr; Terug naar website</a>
+</nav>
+
+<main class="page">
+  <div class="signup">
+
+    <div id="form-view">
+      <span class="signup-badge">14 dagen gratis</span>
+      <h1>Start je proefperiode</h1>
+      <p class="sub">Maak je eerste offerte in minder dan 5 minuten. Geen creditcard nodig, geen verplichtingen.</p>
+
+      <div class="row">
+        <div class="field">
+          <label>Voornaam</label>
+          <input type="text" id="f-name" placeholder="Jan" autocomplete="given-name" required>
+        </div>
+        <div class="field">
+          <label>Bedrijfsnaam</label>
+          <input type="text" id="f-company" placeholder="Acme BV" autocomplete="organization" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>E-mailadres</label>
+        <input type="email" id="f-email" placeholder="jan@acme.be" autocomplete="email" required>
+      </div>
+
+      <div class="field">
+        <label>Wachtwoord</label>
+        <input type="password" id="f-pass" placeholder="Minstens 8 tekens" autocomplete="new-password" minlength="8" required>
+      </div>
+
+      <div class="field">
+        <label>In welke sector werk je?</label>
+        <div class="sectors" id="f-sectors">
+          <button type="button" class="sector-chip" data-sector="av">AV & Vergaderzalen</button>
+          <button type="button" class="sector-chip" data-sector="solar">Zonne-energie</button>
+          <button type="button" class="sector-chip" data-sector="security">Security</button>
+          <button type="button" class="sector-chip" data-sector="interior">Interieur</button>
+          <button type="button" class="sector-chip" data-sector="hvac">HVAC</button>
+          <button type="button" class="sector-chip" data-sector="events">Events</button>
+          <button type="button" class="sector-chip" data-sector="other">Anders</button>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-primary" id="btn-signup" onclick="doSignup()">
+        Gratis starten
+      </button>
+
+      <div class="status" id="status"></div>
+
+      <div class="features">
+        <div class="feature"><span class="feature-icon">✓</span> Volledige functionaliteit tijdens je proefperiode</div>
+        <div class="feature"><span class="feature-icon">✓</span> Je eigen logo, kleuren en huisstijl</div>
+        <div class="feature"><span class="feature-icon">✓</span> Onbeperkt offertes maken en delen</div>
+      </div>
+
+      <div class="legal">
+        Door je aan te melden ga je akkoord met onze<br>
+        <a href="#">Algemene voorwaarden</a> en <a href="#">Privacybeleid</a>
+      </div>
+    </div>
+
+    <!-- Loading spinner tijdens auto-login -->
+    <div id="login-view" style="display:none">
+      <div class="loader">
+        <div class="spinner"></div>
+        <div class="loader-text">Je omgeving wordt klaargezet…</div>
+      </div>
+    </div>
+
+    <!-- Fallback als auto-login niet lukt -->
+    <div id="fallback-view" style="display:none">
+      <div class="success-view">
+        <div class="success-icon">✅</div>
+        <h2>Je account is klaar!</h2>
+        <p>Log in met je gegevens om aan de slag te gaan.</p>
+        <a class="btn btn-primary" id="btn-fallback" href="#" style="display:inline-block;width:auto;padding:13px 40px;text-decoration:none">Naar VisiOffer &rarr;</a>
+        <div id="fallback-meta" style="margin-top:16px;font-size:12px;color:var(--text-secondary)"></div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Supabase JS -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   CONFIGURATIE
+   ═══════════════════════════════════════════════════════════════ */
+var WORKER_URL = "https://quotestudio.stijn-borloo-968.workers.dev";
+var APP_URL    = "app/";
+var SUPA_URL   = "https://dgzkuqvviivoafinrfty.supabase.co";
+var SUPA_ANON  = "sb_publishable_tBJ3WekHvNawQCECwdgT5Q_F2bI-769";
+
+var _supa = null;
+function getSupa() {
+  if (!_supa && window.supabase) {
+    _supa = window.supabase.createClient(SUPA_URL, SUPA_ANON);
+  }
+  return _supa;
+}
+
+/* ═══ Sector chips ═══ */
+var _sector = "";
+document.getElementById("f-sectors").addEventListener("click", function(e) {
+  var chip = e.target.closest(".sector-chip");
+  if (!chip) return;
+  document.querySelectorAll(".sector-chip").forEach(function(c) { c.classList.remove("active"); });
+  chip.classList.add("active");
+  _sector = chip.getAttribute("data-sector") || "";
+});
+
+/* ═══ Signup + auto-login ═══ */
+async function doSignup() {
+  var name    = (document.getElementById("f-name").value || "").trim();
+  var company = (document.getElementById("f-company").value || "").trim();
+  var email   = (document.getElementById("f-email").value || "").trim().toLowerCase();
+  var pass    = (document.getElementById("f-pass").value || "");
+  var btn     = document.getElementById("btn-signup");
+  var status  = document.getElementById("status");
+
+  if (!name)                { showErr("Vul je voornaam in."); return; }
+  if (!company)             { showErr("Vul je bedrijfsnaam in."); return; }
+  if (!email.includes("@")) { showErr("Vul een geldig e-mailadres in."); return; }
+  if (pass.length < 8)      { showErr("Je wachtwoord moet minstens 8 tekens bevatten."); return; }
+
+  btn.disabled = true;
+  btn.textContent = "Account aanmaken\u2026";
+  status.className = "status";
+  status.textContent = "";
+
+  var tenantSlug = "";
+
+  try {
+    /* ── 1. Worker: tenant + user aanmaken ─────────────────────── */
+    var res = await fetch(WORKER_URL + "/demo-signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: name,
+        company: company,
+        email: email,
+        password: pass,
+        sector: _sector
+      })
+    });
+
+    var data = await res.json().catch(function() { return {}; });
+    if (!res.ok || data.error) {
+      throw new Error(data.error || "Er ging iets mis. Probeer het opnieuw.");
+    }
+
+    tenantSlug = data.tenant_slug || "";
+    var appUrl = APP_URL + "?tenant=" + tenantSlug;
+
+    /* ── 2. Loading spinner tonen ──────────────────────────────── */
+    document.getElementById("form-view").style.display = "none";
+    document.getElementById("login-view").style.display = "block";
+
+    /* ── 3. Auto-login via Supabase (zelfde origin = zelfde localStorage) */
+    var client = getSupa();
+    if (client) {
+      /* Eerst eventuele bestaande sessie uitloggen */
+      await client.auth.signOut().catch(function(){});
+
+      var loginRes = await client.auth.signInWithPassword({
+        email: email,
+        password: pass
+      });
+
+      if (loginRes.data && loginRes.data.session) {
+        /* Sessie staat nu in localStorage — redirect naar de app */
+        window.location.href = appUrl;
+        return;
+      }
+    }
+
+    /* ── 4. Fallback: auto-login mislukt ───────────────────────── */
+    showFallback(appUrl, tenantSlug, email, data.expires);
+
+  } catch (e) {
+    if (document.getElementById("login-view").style.display !== "none") {
+      showFallback(APP_URL + "?tenant=" + tenantSlug, tenantSlug, email, null);
+    } else {
+      showErr(e.message);
+      btn.disabled = false;
+      btn.textContent = "Gratis starten";
+    }
+  }
+}
+
+function showFallback(appUrl, slug, email, expires) {
+  document.getElementById("login-view").style.display = "none";
+  document.getElementById("fallback-view").style.display = "block";
+  document.getElementById("btn-fallback").href = appUrl;
+  document.getElementById("fallback-meta").innerHTML =
+    (slug ? "Je omgeving: <strong>" + slug + "</strong>" : "") +
+    (expires ? " &middot; Geldig tot " + new Date(expires).toLocaleDateString("nl-BE") : "") +
+    (email ? "<br>Inloggen met <strong>" + email + "</strong>" : "");
+}
+
+function showErr(msg) {
+  var s = document.getElementById("status");
+  s.className = "status error";
+  s.textContent = msg;
+}
+</script>
+
+</body>
+</html>
