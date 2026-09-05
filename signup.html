@@ -232,7 +232,7 @@ async function doSignup() {
     }
 
     /* Succes */
-    var loginUrl = data.login_url || (APP_URL + "?tenant=" + (data.tenant_slug || ""));
+   var loginUrl = APP_URL + "?tenant=" + (data.tenant_slug || "") + "&logout=1";
     document.getElementById("form-view").style.display = "none";
     document.getElementById("success-view").style.display = "block";
     document.getElementById("btn-go").href = loginUrl;
