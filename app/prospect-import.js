@@ -121,16 +121,19 @@
   function injectButton() {
     var cnField = $("c-nm");
     if (!cnField) return;
-    var wrapper = cnField.closest(".field");
-    if (wrapper) wrapper = wrapper.parentElement;
-    if (!wrapper || wrapper.querySelector(".pi-btn")) return;
+    var card = cnField.closest(".card");
+    if (!card || card.querySelector(".pi-btn")) return;
+
+    // Plaats NA het Klantnaam-veld, VOOR het Adres-veld
+    var cnWrapper = cnField.closest(".field");
+    if (!cnWrapper || !cnWrapper.nextElementSibling) return;
 
     var btn = document.createElement("button");
     btn.type = "button";
     btn.className = "pi-btn";
     btn.innerHTML = '<span class="pi-ico">🔗</span> Importeer klantgegevens van website…';
     btn.onclick = function (e) { e.preventDefault(); openModal(); };
-    wrapper.insertBefore(btn, wrapper.firstChild);
+    card.insertBefore(btn, cnWrapper.nextElementSibling);
   }
 
   /* ── Modal openen ────────────────────────────────────────────────────── */
