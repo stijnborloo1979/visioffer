@@ -352,15 +352,12 @@
       if (email) setVal("c-em", email);
     }
 
-    // AI intro → tekstblok
+    // AI intro → schrijf naar het intro/oplossingstekst-veld (p-in)
     if (data.ai && data.ai.intro_text && isChecked("intro")) {
-      if (typeof window.addTextBlock === "function") {
-        window.addTextBlock(data.ai.intro_text);
-      } else {
-        // Fallback: kopieer naar klembord
-        try {
-          navigator.clipboard.writeText(data.ai.intro_text);
-        } catch (e) {}
+      var introEl = $("p-in");
+      if (introEl) {
+        introEl.value = data.ai.intro_text;
+        introEl.dispatchEvent(new Event("input", { bubbles: true }));
       }
     }
 
