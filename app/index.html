@@ -12828,6 +12828,7 @@ async function adminListUsers(){
       var d=u.created_at?new Date(u.created_at).toLocaleDateString("nl-BE"):"";
       var last=u.last_sign_in_at?new Date(u.last_sign_in_at).toLocaleDateString("nl-BE"):ui("nooit");
       var role=(u.app_metadata&&u.app_metadata.role)||(u.admin?'admin':'user');
+      var tnt=(u.app_metadata&&u.app_metadata.tenant_id)||"";
       var roleColors={user:'#fff',admin:'#FFF3E0',sales:'#F0FFF4'};
       var textColors={user:'#333',admin:'#E65100',sales:'#166634'};
       var roleSel='<select onchange="adminSetRole(\''+u.id+'\',this.value,\''+esc(u.email||"")+'\')" style="font-size:10.5px;padding:3px 5px;border:1px solid var(--bd);border-radius:4px;background:'+(roleColors[role]||'#fff')+';color:'+(textColors[role]||'#333')+';font-family:inherit;font-weight:bold;flex-shrink:0">'
@@ -12839,7 +12840,7 @@ async function adminListUsers(){
         +'<div style="flex:1;min-width:0">'
           +'<div style="font-size:12.5px;font-weight:bold;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(u.email||"")
           +(!u.confirmed?' <span style="font-size:8.5px;background:#FFFDE7;color:#F9A825;border-radius:3px;padding:1px 5px;font-weight:bold;vertical-align:middle">'+ui("WACHT OP ACTIVATIE")+'</span>':"")+'</div>'
-          +'<div style="font-size:10.5px;color:var(--gm);margin-top:1px">'+ui("Sinds")+' '+d+' \u2014 '+ui("laatst actief:")+' '+last+'</div>'
+          +'<div style="font-size:10.5px;color:var(--gm);margin-top:2px;display:flex;align-items:center;gap:6px;flex-wrap:wrap"><span>'+ui("Sinds")+' '+d+' \u2014 '+ui("laatst actief:")+' '+last+'</span>'+(tnt?'<span style="background:#EEF2FF;color:#3730A3;border-radius:4px;padding:2px 8px;font-size:10px;font-weight:700">'+esc(tnt)+'</span>':'<span style="background:#FEF2F2;color:#DC2626;border-radius:4px;padding:2px 8px;font-size:10px;font-weight:700">geen tenant</span>')+'</div>'
         +'</div>'
         +roleSel
         +'<button class="btn b-gray b-sm" style="color:#c62828" onclick="adminDeleteUser(\''+u.id+'\',\''+esc(u.email||"")+'\')" title="'+ui("Verwijderen")+'">\u2715</button>'
