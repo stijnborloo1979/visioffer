@@ -1,6 +1,6 @@
 // VisiOffer - Service Worker
 // Timestamp: 2026-09-05T00:00:00Z
-var CACHE = "visioffer-v14";
+var CACHE = "visioffer-v15";
 var INDEX = "index.html";
 
 self.addEventListener("install", function(e) {
