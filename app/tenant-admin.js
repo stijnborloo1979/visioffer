@@ -45,7 +45,7 @@
     { key: "logoBackdrop",     label: "Logo op wit vlak (cover)", type: "checkbox", section: "branding",
       hint: "Subtiel wit kader achter het cover-logo." },
     { key: "logoSize",         label: "Logogrootte balk", type: "range",  section: "layout",
-      min: 14, max: 44, step: 1, def: 24,
+      min: 14, max: 56, step: 1, def: 24,
       hint: "Hoogte logo linksboven (px)." },
     { key: "coverLogoSize",    label: "Logogrootte cover", type: "range", section: "layout",
       min: 20, max: 90, step: 1, def: 34,
