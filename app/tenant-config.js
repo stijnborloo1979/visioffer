@@ -410,7 +410,7 @@
         var el = document.getElementById("topbar-logo");
         if (!el) return;
         var t = TC.all();
-        var h = Math.max(12, Math.min(44, Number(t.logoSize) || 24));
+        var h = Math.max(12, Math.min(56, Number(t.logoSize) || 24));
         el.setAttribute("data-no-brand", "");
         el.style.height = h + "px";
         if (t.logo) {
