@@ -368,6 +368,7 @@
       TC.applyManifest();
       TC.applyBrand();
       TC.applyTopbar();
+      TC.applyLoginLogo();
       TC.applyCoverLogos();
       TC.applyMraas();
     },
@@ -410,7 +411,7 @@
         var el = document.getElementById("topbar-logo");
         if (!el) return;
         var t = TC.all();
-        var h = Math.max(12, Math.min(56, Number(t.logoSize) || 24));
+        var h = Math.max(12, Math.min(44, Number(t.logoSize) || 24));
         el.setAttribute("data-no-brand", "");
         el.style.height = h + "px";
         if (t.logo) {
@@ -420,6 +421,25 @@
           el.innerHTML = '<span style="font-size:' + Math.max(13, Math.round(h * 0.72)) + 'px;'
             + 'font-weight:900;color:' + (t.primaryColor || "#2563eb") + ';'
             + 'letter-spacing:-.02em;white-space:nowrap">' + esc(t.companyNameShort) + '</span>';
+        }
+      } catch (e) {}
+    },
+
+    /* Logo op het loginscherm — toont het tenant-logo boven de bedrijfsnaam.
+       Zonder logo: eerste letter van companyNameShort in de merkkleur. */
+    applyLoginLogo: function () {
+      try {
+        var el = document.querySelector(".lp-logo-sq");
+        if (!el) return;
+        var t = TC.all();
+        if (t.logo) {
+          /* Echt logo: wit vierkant behouden als achtergrond, logo erin */
+          el.innerHTML = fitLogo(t.logo, 30);
+          el.style.padding = "6px";
+        } else {
+          /* Geen logo → eerste letter van de merknaam */
+          var letter = (t.companyNameShort || t.companyName || "Q").charAt(0).toUpperCase();
+          el.innerHTML = '<span style="color:' + (t.primaryColor || "var(--red)") + ';font-size:22px;font-weight:900;letter-spacing:-.04em">' + letter + '</span>';
         }
       } catch (e) {}
     },
