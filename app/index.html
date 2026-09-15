@@ -11987,7 +11987,7 @@ function _doRender(){
         }
         pageHeader=sectionTitleH+'<div style="margin-bottom:14px"><div class="zs-title">'+esc(z.name)+pageLabel+'<span>'+z.items.length+' item'+(z.items.length!==1?'s':'')+'</span></div>'+zaalIntroH;
       }else{
-        pageHeader='<div style="margin-bottom:10px"><div class="zs-title" style="background:#b71c1c">'+esc(z.name)+' <span style="opacity:.8">\u2014 vervolg <span style="font-size:8px">('+( pi+1)+'/'+nPg+')</span></span><span>'+z.items.length+' items</span></div><div style="font-size:8.5px;color:#aaa;padding:3px 2px 8px;font-style:italic">\u21b3 vervolg technische bepalingen</div>';
+        pageHeader='<div style="margin-bottom:10px"><div class="zs-title" style="background:var(--red)">'+esc(z.name)+' <span style="opacity:.8">\u2014 vervolg <span style="font-size:8px">('+( pi+1)+'/'+nPg+')</span></span><span>'+z.items.length+' items</span></div><div style="font-size:8.5px;color:#aaa;padding:3px 2px 8px;font-style:italic">\u21b3 vervolg technische bepalingen</div>';
       }
       var bottomNote=(!isLast)?'<div style="text-align:right;font-size:8px;color:#bbb;padding:6px 2px 0;font-style:italic">\u25bc vervolg op volgende pagina</div>':'';
       techHTML+='<div class="a4">'+PH()+'<div class="pg-body">'+pageHeader+cards+bottomNote+'</div></div>'+PF(techPg)+'</div>';
