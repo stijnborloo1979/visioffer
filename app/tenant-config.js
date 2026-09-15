@@ -433,14 +433,18 @@
         if (!el) return;
         var t = TC.all();
         if (t.logo) {
-          /* Echt logo: wit vierkant behouden als achtergrond, logo erin */
-          el.innerHTML = fitLogo(t.logo, 30);
-          el.style.padding = "6px";
+          /* Echt logo: toon vrij (geen kubus), wit-gefilterd voor op donkere achtergrond */
+          el.className = "";
+          el.style.cssText = "display:block;margin-bottom:14px;max-width:180px;height:auto";
+          el.innerHTML = fitLogo(t.logoWhite || t.logo, 42);
         } else {
-          /* Geen logo → eerste letter van de merknaam */
+          /* Geen logo → eerste letter van de merknaam in een kubus */
           var letter = (t.companyNameShort || t.companyName || "Q").charAt(0).toUpperCase();
           el.innerHTML = '<span style="color:' + (t.primaryColor || "var(--red)") + ';font-size:22px;font-weight:900;letter-spacing:-.04em">' + letter + '</span>';
         }
+        /* Tagline "PROFESSIONAL QUOTES" verbergen */
+        var tag = document.querySelector(".lp-tagline");
+        if (tag) tag.style.display = "none";
       } catch (e) {}
     },
 
